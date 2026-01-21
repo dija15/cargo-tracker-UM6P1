@@ -5,6 +5,22 @@ pipeline {
         githubPush()   
     }
 
+    tools {
+        jdk 'jdk17'
+        maven 'Maven'
+    }
+
+    stages {
+        stage('Build & Test') {
+            steps {
+                bat '''
+                    java -version
+                    mvn clean verify
+                '''
+            }
+        }
+    }
+
     stages {
 
         stage('Clone') {

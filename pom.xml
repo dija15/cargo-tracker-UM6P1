@@ -274,7 +274,7 @@
               <environmentVariables>
                 <GLASSFISH_HOME>${project.build.directory}/glassfish7</GLASSFISH_HOME>
               </environmentVariables>
-            </configuration>
+            </configuration>       
           </plugin>
           <plugin>
             <groupId>org.codehaus.cargo</groupId>
