@@ -8,7 +8,7 @@ pipeline {
                     url: 'https://github.com/dija15/cargo-tracker-UM6P1.git'
             }
         }
-
+         //test and build stage
         stage('Build & Test') {
             steps {
                 echo "Java version:"
