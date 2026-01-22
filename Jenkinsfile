@@ -1,21 +1,55 @@
 pipeline {
-    agent any  // ← Changé ici
-    
+    agent any
+
+    triggers {
+        githubPush()   
+    }
+
+    tools {
+    maven 'Maven'  // This name must match the name you configured in Jenkins
+}
+
     stages {
-        stage('Build') {
+
+        stage('Clone') {
             steps {
-                echo 'Building...'
+                git branch: 'main', url: 'https://github.com/dija15/cargo-tracker-UM6P1.git'
             }
         }
-        stage('Test') {
+
+        stage('Build & Test with Coverage') {
             steps {
-                echo 'Testing...'
+                bat 'mvn clean verify'
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying...'
+
+       /* stage('SonarQube Analysis') {
+            environment {
+                SONAR_TOKEN = credentials('sonar-token-id')
             }
+            steps {
+                withSonarQubeEnv('SonarQube Local') {
+                    bat """
+                        mvn sonar:sonar ^
+                        -Dsonar.projectKey=cargo-tracker ^
+                        -Dsonar.projectName="Cargo Tracker" ^
+                        -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml ^
+                        -Dsonar.host.url=http://localhost:9000 ^
+                        -Dsonar.token=%SONAR_TOKEN%
+                    """
+                }
+            }
+        }*/
+    }
+//
+    post {
+        success {
+            echo 'Build et analyse terminés avec succès !'
+        }
+        failure {
+            echo 'Échec du build ou des tests.'
         }
     }
-}
+
+    // new test
+}// new2
