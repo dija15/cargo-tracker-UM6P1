@@ -6,7 +6,8 @@ pipeline {
     }
 
     tools {
-    maven 'Maven'  // This name must match the name you configured in Jenkins
+        jdk 'jdk17'
+        maven 'Maven'
 }
 //new2
 //test and build code
