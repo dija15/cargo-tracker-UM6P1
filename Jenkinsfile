@@ -2,16 +2,18 @@ pipeline {
     agent any
 
     triggers {
-        githubPush()   
+        githubPush()
     }
-
-    tools {
-        jdk 'jdk17'
-        maven 'Maven'
-    }
-
 
     stages {
+
+        stage('Clone Repository') {
+            steps {
+                git branch: 'develop',
+                    url: 'https://github.com/akito-sama/cargo-tracker.git'
+            }
+        }
+
         stage('Build & Test') {
             steps {
                 bat '''
@@ -20,30 +22,14 @@ pipeline {
                 '''
             }
         }
-    
-
-        stage('Clone') {
-            steps {
-                git branch: 'develop', url: 'https://github.com/akito-sama/cargo-tracker.git'
-            }
-        }
-
-        stage('Build & Test with Coverage') {
-            steps {
-                bat 'mvn clean verify'
-            }
-        }
-
-        
     }
 
-//
     post {
         success {
-            echo 'Build et analyse terminés avec succès !'
+            echo 'Build et tests réussis ✅'
         }
         failure {
-            echo 'Échec du build ou des tests.'
+            echo 'Échec du build ou des tests ❌'
         }
     }
 }
