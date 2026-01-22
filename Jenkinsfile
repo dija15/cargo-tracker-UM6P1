@@ -20,9 +20,7 @@ pipeline {
                 '''
             }
         }
-    }
-
-    stages {
+    
 
         stage('Clone') {
             steps {
@@ -38,6 +36,7 @@ pipeline {
 
         
     }
+
 //
     post {
         success {
