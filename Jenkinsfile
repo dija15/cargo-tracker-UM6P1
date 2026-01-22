@@ -9,8 +9,8 @@ pipeline {
     maven 'Maven'  // This name must match the name you configured in Jenkins
 }
 //new2
+//test and build code
     stages {
-
         stage('Clone') {
             steps {
                 git branch: 'main', url: 'https://github.com/dija15/cargo-tracker-UM6P1.git'
