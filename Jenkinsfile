@@ -8,12 +8,12 @@ pipeline {
     tools {
     maven 'Maven'  // This name must match the name you configured in Jenkins
 }
-
+//new2
     stages {
 
         stage('Clone') {
             steps {
-                git branch: 'main', url: 'https://github.com/dija15/cargo-tracker-UM6P1.git'
+                git branch: 'main', url: 'https://github.com/dija15/cargo-tracker-UM6P1".git'
             }
         }
 
@@ -52,4 +52,4 @@ pipeline {
     }
 
     // new test
-}// new2
+}// new2"
