@@ -1,12 +1,7 @@
 pipeline {
     agent any
 
-    triggers {
-        githubPush()
-    }
-
     stages {
-
         stage('Clone Repository') {
             steps {
                 git branch: 'main',
@@ -16,10 +11,10 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                bat '''
-                    java -version
-                    mvn clean verify
-                '''
+                echo "Java version:"
+                bat 'java -version'
+                echo "Maven build:"
+                bat 'mvn clean verify'
             }
         }
     }
