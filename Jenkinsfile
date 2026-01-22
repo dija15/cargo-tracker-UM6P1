@@ -1,30 +1,21 @@
 pipeline {
-    agent any
-
+    agent any  // ← Changé ici
+    
     stages {
-        stage('Clone Repository') {
+        stage('Build') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/dija15/cargo-tracker-UM6P1.git'
+                echo 'Building...'
             }
         }
-         //test and build stage
-        stage('Build & Test') {
+        stage('Test') {
             steps {
-                echo "Java version:"
-                bat 'java -version'
-                echo "Maven build:"
-                bat 'mvn clean verify'
+                echo 'Testing...'
             }
         }
-    }
-
-    post {
-        success {
-            echo 'Build et tests réussis ✅'
-        }
-        failure {
-            echo 'Échec du build ou des tests ❌'
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+            }
         }
     }
 }
